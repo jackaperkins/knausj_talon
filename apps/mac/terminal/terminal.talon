@@ -36,4 +36,13 @@ suspend:
 resume:
   insert("fg")
   key(enter)
+list:
+  insert("ls")
+  key(enter)
+back up:
+  insert("cd  ..")
+  key(enter)
+change dur:
+  insert("cd  ")
+
 

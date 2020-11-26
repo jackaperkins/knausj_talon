@@ -1,11 +1,13 @@
-from talon import imgui, Module, speech_system, actions
+from talon import imgui, Module, speech_system, actions, ui
 
 # We keep hist_len lines of history, but by default display only hist_short_len of them.
 hist_len = 50
-hist_short_len = 10
+hist_short_len = 6
 hist_more = False
 history = []
 
+
+main_screen = ui.main_screen()
 
 def parse_phrase(word_list):
     return " ".join(word.split("\\")[0] for word in word_list)
@@ -25,11 +27,12 @@ def on_phrase(j):
         history = history[-hist_len:]
 
 # todo: dynamic rect?
-@imgui.open(y=0, software=False)
+@imgui.open(y=main_screen.height/2, x=main_screen.width-170, software=False)
 def gui(gui: imgui.GUI):
     global history
     gui.text("Command History")
     gui.line()
+
     text = history[:] if hist_more else history[-hist_short_len:]
     for line in text:
         gui.text(line)
